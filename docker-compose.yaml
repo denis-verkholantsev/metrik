@@ -1,0 +1,50 @@
+version: "3"
+
+services:
+  server:
+    image: metrik-server:latest
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: make run
+    restart: always
+    ports:
+      - 8080:8080
+      - 5678:5678
+    depends_on:
+      - edgedb
+    env_file:
+      - ./config/docker.env
+    volumes:
+      - .:/src
+      - /src/.venv/
+
+  edgedb:
+    image: edgedb/edgedb
+    environment:
+      EDGEDB_SERVER_SECURITY: insecure_dev_mode
+    volumes:
+      - "./dbschema:/dbschema"
+    ports:
+      - 5656:5656
+
+  grafana:
+    image: grafana/grafana:latest
+    ports:
+      - 3000:3000
+    volumes:
+      - ./.cache/grafana:/var/lib/grafana
+
+  prometheus:
+    image: prom/prometheus
+    volumes:
+      - ./config/prometheus/:/etc/prometheus/
+      - ./.cache/prometheus/:/prometheus
+    command:
+      - "--config.file=/etc/prometheus/prometheus.yml"
+      - "--storage.tsdb.path=/prometheus"
+      - "--web.console.libraries=/usr/share/prometheus/console_libraries"
+      - "--web.console.templates=/usr/share/prometheus/consoles"
+    ports:
+      - 9090:9090
+    restart: always

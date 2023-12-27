@@ -1,0 +1,71 @@
+[tool.poetry]
+name = "server"
+version = "0.1.0"
+description = ""
+authors = ["Ilya Katun <katun.ilya@gmail.com>"]
+readme = "README.md"
+include = [{ path = "app" }, { path = 'scripts' }]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+
+fastapi = { version = "^0.100.0", extras = ["python-multipart"] }
+pydantic = { version = "^2.0.2", extras = ["email"] }
+edgedb = "^1.5.0"
+toolz = "^0.12.0"
+pydantic-settings = "^2.0.1"
+uvicorn = "^0.23.0"
+python-multipart = "^0.0.6"
+passlib = {extras = ["bcrypt"], version = "^1.7.4"}
+prometheus-fastapi-instrumentator = "^6.1.0"
+authlib = "^1.2.1"
+case-converter = "^1.1.0"
+
+[tool.poetry.group.dev.dependencies]
+autoflake = "^2.2.0"
+black = "^23.7.0"
+flake8 = "^6.0.0"
+flake8-builtins = "^2.1.0"
+flake8-comprehensions = "^3.14.0"
+flake8-eradicate = "^1.5.0"
+flake8-isort = "^6.0.0"
+flake8-logging-format = "^0.9.0"
+flake8-print = "^5.0.0"
+flake8-pytest = "^1.4"
+flake8-pytest-style = "^1.7.2"
+flake8-quotes = "^3.3.2"
+flake8-return = "^1.2.0"
+isort = { extras = ["pyproject"], version = "^5.12.0" }
+mypy = "^1.4.1"
+pep8-naming = "^0.13.3"
+pylint = "^2.17.4"
+pylint-requests = "^0.1.1"
+types-requests = "^2.31.0.2"
+types-dateparser = "^1.1.4.10"
+types-deprecated = "^1.2.9.3"
+flake8-bugbear = "^23.7.10"
+flake8-string-format = "^0.3.0"
+flake8-black = "^0.3.6"
+flake8-expression-complexity = "^0.0.11"
+flake8-annotations-complexity = "^0.0.8"
+flake8-requirements = "^1.7.8"
+pre-commit = "^3.4.0"
+
+[tool.poetry.group.test.dependencies]
+pytest = "^7.4.0"
+pytest-bdd = "^6.1.1"
+pytest-xdist = "^3.3.1"
+pytest-mock = "^3.11.1"
+pytest-rerunfailures = "^12.0"
+httpx = "^0.24.1"
+faker = "^19.2.0"
+pytest-cov = "^4.1.0"
+pytest-dotenv = "^0.5.2"
+pytest-sugar = "^0.9.7"
+pytest-asyncio = "^0.21.1"
+pytest-lazy-fixture = "^0.6.3"
+hypothesis = { extras = ["all"], version = "^6.84.2" }
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
